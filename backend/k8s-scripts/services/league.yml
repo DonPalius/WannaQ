@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: league-service-app
+  namespace: default
+  labels:
+    app: league-service-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: league-service-app
+  template:
+    metadata:
+      labels:
+        app: league-service-app
+    spec:
+      containers:
+        - name: league-service-app
+          image: league_service
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: wannaq-secret
+                  key: postgres-username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wannaq-secret
+                  key: postgres-password
+            - name: PG_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: wannaq-config
+                  key: league-db-url
+            - name: RIOT_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: wannaq-secret
+                  key: league-api-key
+
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  league-service-svc
+spec:
+  selector:
+    app:  league-service-app
+  ports:
+    - port:  8080
+      targetPort:  8080
+
+
+

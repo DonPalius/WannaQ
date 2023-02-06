@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: league-database
+  namespace: default
+  labels:
+    app: league-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: league-database
+  template:
+    metadata:
+      labels:
+        app: league-database
+    spec:
+      containers:
+        - name: league-database
+          image: postgres:13.6-alpine
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432
+              name: league-database
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: wannaq-secret
+                  key: postgres-username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wannaq-secret
+                  key: postgres-password
+            - name: POSTGRES_DB
+              value: league_stats
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/league_stats/
+              name: leaguedb
+      volumes:
+        - name: leaguedb
+          persistentVolumeClaim:
+            claimName: league-db-claim
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  league-db-svc
+spec:
+  type: ClusterIP
+  selector:
+    app:  league-database
+  ports:
+    - port: 5432
+      targetPort: 5432

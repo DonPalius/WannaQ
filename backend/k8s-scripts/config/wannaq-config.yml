@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wannaq-config
+  labels:
+    app: wannaq
+data:
+  league-db-url: league-db-svc
+  apex-db-url: apex-db-svc
+  league-svc-url: league-service-svc
+  apex-svc-url: apex-service-svc
+  

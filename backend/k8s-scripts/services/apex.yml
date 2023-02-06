@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apex-service-app
+  namespace: default
+  labels:
+    app: apex-service-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apex-service-app
+  template:
+    metadata:
+      labels:
+        app: apex-service-app
+    spec:
+      containers:
+        - name: apex-service-app
+          image: apex_service
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8081
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: wannaq-secret
+                  key: postgres-username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wannaq-secret
+                  key: postgres-password
+            - name: PG_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: wannaq-config
+                  key: apex-db-url
+            - name: APEX_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: wannaq-secret
+                  key: apex-api-key
+
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  apex-service-svc
+spec:
+  selector:
+    app:  apex-service-app
+  ports:
+    - port:  8081
+      targetPort:  8081

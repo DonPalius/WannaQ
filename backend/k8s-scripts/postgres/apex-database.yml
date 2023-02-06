@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apex-database
+  namespace: default
+  labels:
+    app: apex-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apex-database
+  template:
+    metadata:
+      labels:
+        app: apex-database
+    spec:
+      containers:
+        - name: apex-postgres
+          image: postgres:13.6-alpine
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432
+              name: apex-postgres
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: wannaq-secret
+                  key: postgres-username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wannaq-secret
+                  key: postgres-password
+            - name: POSTGRES_DB
+              value: apex_stats
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/apex_stats/
+              name: apexdb
+      volumes:
+        - name: apexdb
+          persistentVolumeClaim:
+            claimName: apex-db-claim
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: apex-db-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: apex-database
+  ports:
+    - port: 5432
+      targetPort: 5432

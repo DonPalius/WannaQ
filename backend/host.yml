@@ -1,0 +1,6 @@
+apiVersion: getAmbassador.io/v3alpha1
+kind: Host
+metadata: 
+  name: wildcard-host
+spec: 
+  ambassador_id: ["myid"]

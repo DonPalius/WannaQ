@@ -1,0 +1,83 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "proxy": "https://api.mozambiquehe.re/",
+  "private": true,
+  "dependencies": {
+    "@alpinejs/collapse": "^3.10.2",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.16",
+    "@react-navigation/native": "^6.0.6",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.24.0",
+    "bootstrap": "^5.2.0-beta1",
+    "bootstrap-icons": "^1.9.1",
+    "bootstrap-social": "^5.1.1",
+    "call-of-duty-api": "^3.1.1",
+    "cdbreact": "^1.5.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "email-validator": "^2.0.4",
+    "express": "^4.17.2",
+    "firebase": "^9.9.0",
+    "http-proxy-middleware": "^2.0.1",
+    "mdb-react-ui-kit": "^4.1.0",
+    "mdbreact": "^5.2.0",
+    "reach": "^1.0.1",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.0.4",
+    "react-bootstrap-icons": "^1.8.4",
+    "react-bootstrap-sidebar-menu": "^2.0.3",
+    "react-bootstrap-star-rating": "^3.5.5-alpha.0.3",
+    "react-client-session": "^0.0.7",
+    "react-dom": "^18.2.0",
+    "react-firebase-hooks": "^5.0.3",
+    "react-fontawesome": "^1.7.1",
+    "react-google-charts": "^3.0.15",
+    "react-google-login": "^5.2.2",
+    "react-icons": "^4.4.0",
+    "react-image-button": "^1.0.6",
+    "react-minimal-pie-chart": "^8.2.0",
+    "react-rating-stars-component": "^2.2.0",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "5.0.0",
+    "react-settings-pane": "^0.1.5",
+    "react-social-login-buttons": "^3.6.1",
+    "react-star-rating": "^1.4.2",
+    "react-toastify": "^9.0.7",
+    "reactstrap": "^9.1.4",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1",
+    "styled-components": "^5.3.3",
+    "styled-off-canvas": "^1.2.0",
+    "universal-cookie": "^4.0.4",
+    "web-vitals": "^2.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 firefox version",
+      "last 1 chrome version",
+      "last 1 safari version"
+    ]
+  }
+}

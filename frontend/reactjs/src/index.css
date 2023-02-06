@@ -1,0 +1,25 @@
+body {
+  overflow-x: hidden;
+  background-color: gray;
+  margin: 0;
+  padding: 0;
+
+  height: 100%;
+}
+div {
+  color: black;
+  box-sizing: content-box;
+  align-content: center;
+}
+
+p {
+  padding: 25px;
+}
+
+input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  opacity: 1; /* Firefox */
+}
+.offcanvas-size-sm {
+  width: 10px;
+}
